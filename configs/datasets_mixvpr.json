@@ -1,0 +1,53 @@
+{
+  "data_folder": "/home/shared/datasets/",
+  "logs_folder": "logs/MixVPR",
+  "datasets": "all",
+  "datasets_type": "test",
+  "entries": [
+    {
+      "name": "sf_xl_small",
+      "path": "SF-XL/small"
+    },
+    {
+      "name": "sf_xl",
+      "path": "SF-XL/processed"
+    },
+    {
+      "name": "pitts30k",
+      "path": "pitts30k/images"
+    },
+    {
+      "name": "amstertime",
+      "path": "amstertime"
+    },
+    {
+      "name": "msls-val",
+      "path": "msls"
+    },
+    {
+      "name": "nordland",
+      "path": "nordland"
+    },
+    {
+      "name": "spedtest",
+      "path": "SPEDTEST"
+    },
+    {
+      "name": "svox",
+      "path": "svox/images"
+    }
+  ],
+  "method": "mixvpr",
+  "backbone": "ResNet50",
+  "descriptors_dimension": 512,
+  "image_size": 320,
+  "resize_test_imgs": true,
+  "model_mode": "uncertainty",
+  "losses": "uncertainty",
+  "uncertainty_loss": "vmf",
+  "var_head_agg": true,
+  "var_head_linear": "1",
+  "variance_activation": "softplus",
+  "use_labels": true,
+  "positive_dist_threshold": 25
+}

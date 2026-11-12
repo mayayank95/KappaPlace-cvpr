@@ -1,0 +1,50 @@
+{
+  "data_folder": "/home/shared/datasets/",
+  "logs_folder": "logs/CosPlace",
+  "datasets": "sf_xl",
+  "entries": [
+    {
+      "name": "sf_xl_small",
+      "path": "SF-XL/small"
+    },
+    {
+      "name": "sf_xl",
+      "path": "SF-XL/processed"
+    },
+    {
+      "name": "pitts30k",
+      "path": "pitts30k/images"
+    },
+    {
+      "name": "amstertime",
+      "path": "amstertime"
+    },
+    {
+      "name": "msls-val",
+      "path": "msls"
+    },
+    {
+      "name": "nordland",
+      "path": "nordland"
+    },
+    {
+      "name": "spedtest",
+      "path": "SPEDTEST"
+    },
+    {
+      "name": "svox",
+      "path": "svox/images"
+    }
+  ],
+  "method": "cosplace",
+  "backbone": "ResNet18",
+  "descriptors_dimension": 512,
+  "positive_dist_threshold": 25,
+  "batch_size": 32,
+  "image_size": 512,
+  "uncertainty_loss": "gaussian_nll",
+  "groups_num": 1,
+  "datasets_type": "train,val",
+  "variance_activation": "softplus",
+  "patience": 15
+}

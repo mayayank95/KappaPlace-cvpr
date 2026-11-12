@@ -1,0 +1,18 @@
+[submodule "third_party/cosplace"]
+	path = third_party/cosplace
+	url = https://github.com/gmberton/CosPlace.git
+[submodule "third_party/SUE"]
+	path = third_party/SUE
+	url = https://github.com/MubarizZaffar/SUE.git
+[submodule "third_party/stun"]
+	path = third_party/stun
+	url = https://github.com/ramdrop/stun.git
+[submodule "third_party/VPR-methods-evaluation"]
+	path = third_party/VPR-methods-evaluation
+	url = https://github.com/gmberton/VPR-methods-evaluation.git
+[submodule "third_party/MixVPR"]
+	path = third_party/MixVPR
+	url = https://github.com/amaralibey/MixVPR.git
+[submodule "third_party/salad"]
+	path = third_party/salad
+	url = https://github.com/serizba/salad.git
