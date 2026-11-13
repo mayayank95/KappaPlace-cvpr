@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Pitts30k match-confidence figure: top-3 retrievals at high, median, and low joint κ.
 
+Needs the descriptor cache.
+
 Queries are chosen from the top-1 joint κ on Pitts30k:
 
     most certain    maximum joint κ. Its top-3 are all correct.
