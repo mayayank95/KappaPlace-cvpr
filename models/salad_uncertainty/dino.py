@@ -1,4 +1,4 @@
-# DINOv2 backbone wrapper used by SALAD (Serra & Trulls, CVPR 2024).
+# DINOv2 feature-map backbone used by SALAD (Serra & Trulls, CVPR 2024).
 # Architecture is constructed via torch.hub facebookresearch/dinov2 (local cache if present).
 import torch
 import torch.nn as nn

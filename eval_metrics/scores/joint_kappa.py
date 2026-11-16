@@ -48,7 +48,6 @@ def compute_joint_kappa(
         )
     )
 
-
 def compute_l2_joint_kappa(
     predictions: np.ndarray,
     q_var: np.ndarray,
@@ -89,12 +88,11 @@ def compute_mls(
     *,
     d: Optional[int] = None,
 ) -> np.ndarray:
-    """Mutual likelihood score of two r-vMF features (SCF, CVPR 2021).
+    """Mutual likelihood score of two vMF features.
 
     S_MLS = log Z_d(R) − log Z_d(κ_q) − log Z_d(κ_r), with
     R = ||κ_q μ_q + κ_r μ_r||. Descriptors are L2-normalized, so the sphere
-    radius is 1 and the paper's −d log r term is zero. Higher means the two
-    features are more likely to be the same point on the sphere.
+    radius is 1. Higher means the two features are more likely to match.
     """
     kappa_q, kappa_ref, cos_theta = _pair_kappa_and_cos(
         predictions, q_var, db_var, q_desc, db_desc

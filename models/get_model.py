@@ -4,7 +4,7 @@ from typing import Any, Dict
 import torch
 
 from models.model_mode import GeneralModelWrapper, build_model_mode, _stable_var_init
-from models.salad import SaladPrenorm
+from models.salad_uncertainty.salad import SALAD
 
 logger = logging.getLogger(__name__)
 
@@ -67,12 +67,12 @@ def _seed_salad_prenorm_head(model: torch.nn.Module, loaded_keys) -> None:
     if not getattr(root, "_var_from_feature_map", False):
         return
     seq = getattr(getattr(root, "var_head", None), "seq", None)
-    if seq is None or len(seq) == 0 or not isinstance(seq[0], SaladPrenorm):
+    if seq is None or len(seq) == 0 or not isinstance(seq[0], SALAD):
         return
-    prefix = "var_head.seq.0.aggregator."
+    prefix = "var_head.seq.0."
     if loaded_keys and any(str(key).startswith(prefix) for key in loaded_keys):
         return
-    seq[0].aggregator.load_state_dict(root.aggregator.state_dict())
+    seq[0].load_state_dict(root.aggregator.state_dict())
     logger.info(
         "SALAD uncertainty prenorm head initialized from the retrieval aggregator."
     )

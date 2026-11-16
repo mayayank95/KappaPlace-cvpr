@@ -6,8 +6,8 @@ import torch.nn as nn
 
 from models.cosplace_uncertainty.cosplace_model.cosplace_network import GeoLocalizationNet
 from models.cosplace_uncertainty.cosplace_model.layers import L2Norm
-from models.mixvpr import MixVPRModel, mixvpr_agg_config
-from models.salad import SaladEncoder, SaladPrenorm
+from models.mixvpr_uncertainty.mixvpr import MixVPRModel, mixvpr_agg_config
+from models.salad_uncertainty.salad import SALAD, SaladEncoder
 
 
 class _SeqVarHead(nn.Module):
@@ -46,6 +46,18 @@ def _stable_var_init(module, activation="softplus", target_variance=0.1):
                 nn.init.constant_(m.bias, bias_val)
 
 
+def _disable_dropout(module: nn.Module) -> None:
+    """Drop Dropout on the kappa-head aggregator copy so train and eval κ match.
+
+    The frozen retrieval aggregator keeps its own dropout.
+    """
+    for name, child in list(module.named_children()):
+        if isinstance(child, nn.Dropout):
+            setattr(module, name, nn.Identity())
+        else:
+            _disable_dropout(child)
+
+
 def _build_var_head(opt, fc_output_dim, aggregation=None):
     """Build the variance head from orthogonal flags."""
     use_agg = bool(opt.get("var_head_agg", False))
@@ -58,9 +70,11 @@ def _build_var_head(opt, fc_output_dim, aggregation=None):
         assert aggregation is not None, "var_head_agg=True requires the aggregation module"
         copied = copy.deepcopy(aggregation)
         # SALAD's retrieval forward returns the intra-normalized descriptor.
-        # The uncertainty copy returns its own prenorm and keeps its own weights.
-        if str(opt.get("method", "")).lower() == "salad":
-            copied = SaladPrenorm(copied)
+        # The uncertainty copy returns prenorm and keeps its own weights.
+        # The module layout matches Contrastive checkpoints (no wrapper).
+        if isinstance(copied, SALAD):
+            copied.return_prenorm = True
+            _disable_dropout(copied)
         layers.append(copied)
 
     if linear_kind == "d":

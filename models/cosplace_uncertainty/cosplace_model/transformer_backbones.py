@@ -210,5 +210,3 @@ def get_transformer_backbone_and_aggregation(
         f"Unknown transformer backbone {backbone_name!r}; "
         f"expected one of {TRANSFORMER_BACKBONES}"
     )
-
-
