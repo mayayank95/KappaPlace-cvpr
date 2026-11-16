@@ -75,7 +75,7 @@ BACKBONE=ViT bash scripts/cosplace_eval.sh path/to/vit.pth
 BACKBONE=DINOv2-B bash scripts/cosplace_eval.sh path/to/dinov2.pth
 
 bash scripts/contrastive_eval.sh mixvpr path/to/mixvpr_kappa.pth
-bash scripts/contrastive_eval.sh salad-desc path/to/salad_desc_kappa.pth
+bash scripts/contrastive_eval.sh salad path/to/salad_kappa.pth
 ```
 
 `DATASETS` selects one benchmark. CosPlace defaults to `pitts30k`. The contrastive configs evaluate every entry unless `DATASETS` is set. Inference overhead, from KappaPlace, needs a CUDA GPU:
@@ -86,7 +86,7 @@ python scratch/overhead_benchmark.py
 
 ## ⚙️ Configuration
 
-KappaPlace configs: `configs/datasets.json` (CosPlace; the train and eval scripts set ResNet-50, ViT-B/16, or DINOv2-B/14), `configs/datasets_mixvpr.json` (MixVPR-512, 320×320, aggregator head), `configs/datasets_salad_desc.json` (SALAD-544, 322×322, descriptor head). Passing 512 for SALAD is rewritten to the official 8448-d model. JSON defaults (`--config`) merge with command-line overrides (`configs/parser.py`).
+KappaPlace configs: `configs/datasets.json` (CosPlace; the train and eval scripts set ResNet-50, ViT-B/16, or DINOv2-B/14), `configs/datasets_mixvpr.json` (MixVPR-512, 320×320, aggregator head), `configs/datasets_salad.json` (SALAD-544, 322×322, linear head: `Linear(544, 1)` and Softplus on the pre-L2 token and cluster sum). Passing 512 for SALAD is rewritten to the official 8448-d model. JSON defaults (`--config`) merge with command-line overrides (`configs/parser.py`).
 
 Common KappaPlace flags:
 

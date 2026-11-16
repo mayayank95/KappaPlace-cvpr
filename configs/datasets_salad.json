@@ -44,7 +44,7 @@
   "model_mode": "uncertainty",
   "losses": "uncertainty",
   "uncertainty_loss": "vmf",
-  "var_head_agg": true,
+  "var_head_agg": false,
   "var_head_linear": "1",
   "variance_activation": "softplus",
   "use_labels": true,
