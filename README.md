@@ -41,7 +41,7 @@ pip install -r requirements.txt
 
 ## Classification training
 
-In **KappaPlace**. The paper trains three CosPlace backbones. The uncertainty head copies that backbone's aggregation, then `Linear(D, 1)` and Softplus. Joint training updates the backbone and the CosFace prototypes together with the head. Post-training freezes the retrieval model, its class weights, and batch-norm, and trains the head at `1e-3`.
+In **KappaPlace**. The paper trains three CosPlace backbones. The uncertainty head copies that backbone's aggregation, then `Linear(D, 1)` and Softplus. Joint training updates the backbone and the CosFace prototypes together with the head. Early stopping is two-phase: validation recall, then ECE@1, @5, and @10. The recall checkpoint is `best_model_recall.pth`. Post-training freezes the retrieval model, its class weights, and batch-norm, trains the head at `1e-3`, and early-stops on validation ECE@1. The kept weights are `best_model_ece_recall_01.pth`.
 
 | Backbone | `BACKBONE` | Descriptor | Image size |
 | --- | --- | --- | --- |
@@ -55,7 +55,7 @@ BACKBONE=ViT bash scripts/cosplace_train.sh
 BACKBONE=DINOv2-B bash scripts/cosplace_train.sh
 ```
 
-Post-training loads a retrieval checkpoint and freezes it:
+Post-training loads a checkpoint saved by this trainer (it holds the CosFace prototypes) and freezes it:
 
 ```bash
 FREEZE=1 RESUME_MODEL=path/to/retrieval.pth bash scripts/cosplace_train.sh

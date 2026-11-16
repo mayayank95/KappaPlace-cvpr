@@ -274,6 +274,11 @@ def train(args, model, device, dataset_name, datasets_dir):
             args['load_classifiers'],
             freeze=not args.get("trainable_classifiers"),
         )
+        if loaded_optims is None and args.get("freeze_model"):
+            raise ValueError(
+                f"--freeze_model requires CosFace prototypes in {args['load_classifiers']}. "
+                "The checkpoint needs classifiers_state_dict for the same groups_num."
+            )
         if loaded_optims is not None:
             classifiers_optimizers = loaded_optims
     else:
