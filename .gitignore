@@ -17,6 +17,7 @@ raw_data/
 
 # Shell scripts
 *.sh
+!scripts/*.sh
 
 # Training outputs
 runs/
@@ -49,6 +50,7 @@ lightning_logs/
 *.csv
 *.md
 !README.md
+!OVERVIEW.md
 
 # Generated experiment reports (PDFs, charts, landing pages, report builders)
 reports/
@@ -58,6 +60,8 @@ reports/
 
 # Local / WIP scripts
 scripts/
+!scripts/
+!scripts/**
 
 # Local unit tests
 tests/
