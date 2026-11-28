@@ -133,9 +133,9 @@ Open an issue for bugs or questions. Pull requests are welcome; for larger chang
 ## 📖 Citation
 
 ```bibtex
-@article{anonymous2026kappaplace,
+@article{yanko2026kappaplace,
   title={KappaPlace: Learning Hyperspherical Uncertainty for Visual Place Recognition via Prototype-Anchored Supervision},
-  author={Anonymous},
+  author={Yanko, Maya and Shavit, Yoli},
   year={2026}
 }
 ```
